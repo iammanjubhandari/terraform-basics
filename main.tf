@@ -23,3 +23,11 @@ output "instance_id" {
     description = "Instance IP of the created Ec2 instance"
     value = aws_instance.demo-server.id
 }
+
+resource "aws_s3_bucket" "demo-bucket" {
+    bucket = "demo-bucket-870"
+    tags = {
+        name = "demo-s3-bucket"
+        evn = "demo"
+    }
+
