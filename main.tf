@@ -6,6 +6,9 @@ resource "aws_instance" "demo-server" {
     ami = "ami-00bb6a80f01f03502"
     instance_type = "t2.micro"
     key_name = "manju-aws-demo-key"
+    vpc_security_group_ids = ["sg-343222"]
+    subnet_id = "subnet-eddcddzz3"
+    associate_public_ip_address = false
 
     tags = {
     name = "demo-server"
@@ -26,8 +29,16 @@ output "instance_id" {
 
 resource "aws_s3_bucket" "demo-bucket" {
     bucket = "demo-bucket-870"
+    acl    = "private"
     tags = {
         name = "demo-s3-bucket"
         evn = "demo"
     }
+    #versioning enabled
+    versioning {
+      enabled = true
+    }
+}
+
+
 
