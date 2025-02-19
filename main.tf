@@ -8,11 +8,11 @@ resource "aws_instance" "demo-server" {
     key_name = "manju-aws-demo-key"
 
     tags = {
-    Name = "demo-server"
+    name = "demo-server"
     evn = "dev"
+    project="demo"
 }
 }
-
 
 output "instance_public_ip" {
     description = "Public IP of the created Ec2 instance"
