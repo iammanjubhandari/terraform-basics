@@ -17,6 +17,35 @@ resource "aws_instance" "demo-server" {
 }
 }
 
+resource "aws_security_group" "demo-serversg" {
+    name ="demo-sg"
+    description = "Allow the required port"
+    vpc_id = "vpc-0e8029999a9ss9333"
+
+  ingress {
+    description = "allow http"
+    from_port = 443
+    to_port = 443
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+ ingress {
+    description = 80
+    fromfrom_port = 80
+    protocol = "tcp"
+    cidr_blocks = [ "0.0.0.0/0" ]
+ }
+
+egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+  
+}
+
 output "instance_public_ip" {
     description = "Public IP of the created Ec2 instance"
     value = aws_instance.demo-server.public_ip
