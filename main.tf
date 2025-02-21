@@ -37,12 +37,21 @@ resource "aws_security_group" "demo-serversg" {
     cidr_blocks = [ "0.0.0.0/0" ]
  }
 
+ ingress {
+    description = 22
+    fromfrom_port = 22
+    protocol = "tcp"
+    cidr_blocks = [ "106.51.92.90/32" ]
+ }
+
 egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
 }
+
+
   
 }
 
