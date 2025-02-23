@@ -2,6 +2,11 @@ provider "aws" {
     region = "ap-south-1"
 }
 
+resource "aws_key_pair" "demo_key" {
+    key_name   = "manju-aws-demo-key"
+    public_key = file("~/.ssh/id_rsa.pub")
+}
+
 resource "aws_instance" "demo-server" {
     ami = "ami-00bb6a80f01f03502"
     instance_type = "t2.micro"
@@ -15,6 +20,10 @@ resource "aws_instance" "demo-server" {
     evn = "dev"
     project="demo"
 }
+}
+
+resource "aws_eip" "demo_eip" {
+    instance = aws_instance.demo-server.id
 }
 
 resource "aws_security_group" "demo-serversg" {
@@ -32,7 +41,7 @@ resource "aws_security_group" "demo-serversg" {
 
  ingress {
     description = 80
-    fromfrom_port = 80
+    from_port = 80
     protocol = "tcp"
     cidr_blocks = [ "0.0.0.0/0" ]
  }
