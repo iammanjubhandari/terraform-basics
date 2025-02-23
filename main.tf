@@ -74,6 +74,12 @@ output "instance_id" {
     value = aws_instance.demo-server.id
 }
 
+output "elastic_ip" {
+    description = "Elastic IP Address of the EC2 instance"
+    value       = aws_eip.demo_eip.public_ip
+}
+
+
 resource "aws_s3_bucket" "demo-bucket" {
     bucket = "demo-bucket-870"
     acl    = "private"
@@ -85,6 +91,16 @@ resource "aws_s3_bucket" "demo-bucket" {
     versioning {
       enabled = true
     }
+}
+
+output "s3_bucket_name" {
+    description = "S3 Bucket Name"
+    value       = aws_s3_bucket.demo-bucket.id
+}
+
+output "s3_bucket_arn" {
+    description = "S3 Bucket ARN"
+    value       = aws_s3_bucket.demo-bucket.arn
 }
 
 
